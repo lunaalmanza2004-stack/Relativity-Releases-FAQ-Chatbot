@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatbot — {{ version_title }}</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+  <script>
+    window.APP_VERSION = "{{ engine_version }}";
+    window.PAGE_SLUG   = "{{ version_slug }}";
+  </script>
+  <script defer src="/static/js/chat.js"></script>
+</head>
+<body class="theme-purple">
+  <header class="app-header">
+    <div class="left">
+      <div class="automation-orb small" title="Relativity bot"></div>
+
+      <!-- Version select -->
+      <div class="version-picker">
+        <label for="versionSelect" class="sr-only">Version</label>
+        <select id="versionSelect" class="select-pill">
+          <option value="RelativityOne" {{ 'selected' if version_slug=='RelativityOne' else '' }}>Relativity One</option>
+          <option value="Server2024" {{ 'selected' if version_slug=='Server2024' else '' }}>Server 2024</option>
+          <option value="Server2023" {{ 'selected' if version_slug=='Server2023' else '' }}>Server 2023</option>
+        </select>
+      </div>
+
+      <div class="brand">
+        <h1>Chatbot</h1>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="user-chip">
+        <img id="userAvatar" src="/static/img/user_default_avatar.svg" alt="User"/>
+        <span>{{ user.display_name }}</span>
+      </div>
+
+      <!-- ✅ Gear moved to the RIGHT -->
+      <div class="config">
+        <button id="configBtn" class="icon-gear" title="Open settings" aria-haspopup="true" aria-expanded="false">⚙️</button>
+        <div id="configMenu" class="config-menu" role="menu" aria-label="App settings">
+          <div class="cfg-group">
+            <div class="cfg-title">Theme</div>
+            <select id="themeSelect" class="select-pill">
+              <option value="theme-purple">Purple</option>
+              <option value="theme-default">Default</option>
+              <option value="theme-blue">Blue</option>
+              <option value="theme-green">Green</option>
+              <option value="theme-yellow">Yellow</option>
+              <option value="theme-dark">Dark</option>
+            </select>
+          </div>
+
+          <div class="cfg-group">
+            <button id="changeAvatarBtn" class="btn outline-purple" role="menuitem">Change photo</button>
+            <input id="avatarInput" type="file" accept="image/*" hidden/>
+          </div>
+
+          <div class="cfg-group">
+            <button id="clearHistoryBtn" class="btn outline-purple" role="menuitem">Clear chat history (this version)</button>
+          </div>
+
+          <div class="cfg-group grid-2">
+            <a href="/settings" class="btn outline-purple" role="menuitem">Settings</a>
+            <a href="/help" class="btn outline-purple" role="menuitem">Help</a>
+          </div>
+
+          <div class="cfg-group grid-2">
+            <a id="logoutLink" href="/logout" class="btn outline-purple" role="menuitem">Logout</a>
+            <button id="closeAccountBtn" class="btn danger" role="menuitem">Close account</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <aside class="side-panel">
+      <!-- Chat history banner -->
+      <div class="card history-banner">
+        <div class="hb-head">
+          <h3>Chat history</h3>
+          <button id="refreshHistory" class="btn outline-purple">Refresh</button>
+        </div>
+        <div id="historyList" class="history-banner-body"></div>
+      </div>
+
+      <!-- Share -->
+      <div class="card share-card">
+        <h3>Share</h3>
+        <p class="tiny">Share the last answer.</p>
+        <div class="icon-row">
+          <button id="shareGmail" class="icon-btn icon-plain" title="Share via Gmail" aria-label="Share via Gmail">
+            <img src="/static/img/gmail.svg" alt="Gmail"/>
+          </button>
+          <button id="shareWhatsApp" class="icon-btn icon-plain" title="Share via WhatsApp" aria-label="Share via WhatsApp">
+            <img src="/static/img/whatsapp.svg" alt="WhatsApp"/>
+          </button>
+          <button id="shareTelegram" class="icon-btn icon-plain" title="Share via Telegram" aria-label="Share via Telegram">
+            <img src="/static/img/telegram.svg" alt="Telegram"/>
+          </button>
+        </div>
+      </div>
+
+      <!-- Export -->
+      <div class="card export-card">
+        <h3>Export</h3>
+        <div class="dropdown" tabindex="0" aria-haspopup="true">
+          <button class="btn primary" id="exportMenuToggle" aria-expanded="false">Export ▾</button>
+          <div class="menu-panel" role="menu" aria-label="Export options">
+            <button id="downloadConvo" class="menu-item" role="menuitem">Download JSON</button>
+            <button id="downloadPDF" class="menu-item" role="menuitem">Download PDF</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="chat-panel">
+      <div id="chatWindow" class="chat-window">
+        <div class="welcome-banner">
+          <img src="/static/img/robot_wave.svg" alt="Hello" />
+          <div>
+            <div class="wb-title">You're now chatting with the Relativity chatbot. Welcome!</div>
+            <div class="wb-sub">All answers come from {{ docs_source }}.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="composer">
+        <div class="mode-switch">
+          <label>Mode:</label>
+          <select id="modeSelect" class="select-pill">
+            <option value="quick">Quick</option>
+            <option value="guided">Guided</option>
+            <option value="power">Power</option>
+          </select>
+        </div>
+
+        <div class="input-stack">
+          <input id="messageInput" type="text" placeholder="Ask about Relativity release notes..." />
+          <div id="guidedSuggestions" class="suggestions hidden" role="listbox" aria-label="Guided sections"></div>
+        </div>
+
+        <button id="micBtn" class="btn outline-purple mic-btn" title="Voice">🎙️</button>
+        <button id="sendBtn" class="btn primary">Send</button>
+      </div>
+      <div id="voiceStatusInline" class="tiny" style="padding: 0 4px 8px;"></div>
+    </section>
+  </main>
+
+  <audio id="sndUser" src="/static/audio/typing_user.wav" preload="auto"></audio>
+  <audio id="sndBot" src="/static/audio/typing_bot.wav" preload="auto"></audio>
+
+  <template id="msgUserTpl">
+    <div class="msg user">
+      <img src="" class="avatar" />
+      <div class="bubble">
+        <div class="text"></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="msgBotTpl">
+    <div class="msg bot">
+      <img src="/static/img/robot_avatar.svg" class="avatar" />
+      <div class="bubble">
+        <div class="text"></div>
+        <div class="citations"></div>
+      </div>
+    </div>
+  </template>
+
+  <div id="typingIndicator" class="typing hidden">
+    <img src="/static/img/robot_avatar.svg" class="avatar" />
+    <div class="dots"><span></span><span></span><span></span></div>
+  </div>
+</body>
+</html>

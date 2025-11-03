@@ -1,0 +1,22 @@
+{
+  "demo@example.com": {
+    "display_name": "demo",
+    "password_hash": "scrypt:32768:8:1$3rGHV6lZbexi6i8f$00667dac0fe1683ef6320a9183393fc40060aae87199624c7bf8b0f68e91260f85d2d27a89db068e82f6eb4f169a346ac2e5afc2b75c8743d8c0156f10871322"
+  },
+  "lunaalmanza2004@gmail.com": {
+    "display_name": "lhyn.",
+    "password_hash": "scrypt:32768:8:1$vZDt5aWZ9F3KvgHH$faeb1257b435a8d04bcefe7972be82b55d636e0f10148ea0e0ddcfb5d9f0354f3865670b3da46e3b4011d8e90f53c082bc3c5a1272ae5bf347eb942cd3dcfeab"
+  },
+  "estrellaalmanza609@gmail.com": {
+    "display_name": "Luna",
+    "password_hash": "scrypt:32768:8:1$gi65ZQ6A2K5ET9I6$42f28b79707ab2fdffed5ee73d53427823cf503805cc733bd6e7017ebd8006883ce69d57b7b9661ea76c77e436b9eb28682e76472193d83a2cbc33d4f1376cde"
+  },
+  "estrellaalmanza276@gmail.com": {
+    "display_name": "Estrella Almanza",
+    "password_hash": "scrypt:32768:8:1$TBmrNz0b33Nf8AUL$7dc441a670752a6c505db7edb89521fa148c8426e065ad43ee22c922ceebc09756514e16435977707263581711309d8226098e4b8fec3fdff90862442c924d75"
+  },
+  "laualmanza2004@gmail.com": {
+    "display_name": "Laualmanza2004@gmail.com",
+    "password_hash": "scrypt:32768:8:1$sO6p3d9ACEx6SSNT$fb83e1d483a8f3ea9df7defe4e62e962bac5015a5959c96e379b9f0c4787410a33b2ec80d641b5ba2e9182e05f3813d05912de14657c20f7b4756e398c9e6e34"
+  }
+}

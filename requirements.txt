@@ -1,0 +1,16 @@
+flask>=3.0
+python-dotenv>=1.0
+werkzeug>=3.0
+itsdangerous>=2.1
+
+requests>=2.31
+beautifulsoup4>=4.12
+lxml>=5.2
+
+scikit-learn>=1.4
+joblib>=1.4
+
+PyYAML>=6.0    # por si lo usas en otros scripts
+reportlab>=4.2 # para exportar PDF
+
+openai>=1.40   # opcional, solo si usarás /api/stt

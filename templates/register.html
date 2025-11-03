@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register — Chatbot</title>
+  <link rel="stylesheet" href="/static/css/style.css"/>
+</head>
+<body class="auth-body">
+  <div class="login-container">
+    <div class="login-card pretty">
+      <div class="logo-stack">
+        <div class="automation-orb"></div>
+        <h1>Chatbot</h1>
+        <p class="subtitle">Create your account</p>
+      </div>
+
+      {% if error %}
+      <div class="alert error">{{ error }}</div>
+      {% endif %}
+
+      <form method="POST" action="/register" class="login-form" autocomplete="off">
+        <input id="email" name="email" type="email" placeholder="Email" value="{{ email or '' }}" required />
+        <input id="display_name" name="display_name" type="text" placeholder="Display name" value="{{ display_name or '' }}" />
+        <input id="password" name="password" type="password" placeholder="Password (min 6)" required />
+        <input id="confirm" name="confirm" type="password" placeholder="Confirm password" required />
+        <button type="submit" class="btn primary" style="width:100%;">Create account</button>
+      </form>
+
+      <div class="auth-alt tiny">
+        Already have an account? <a class="link-purple" href="/login">Sign in</a>
+      </div>
+
+      <div class="footer tiny">© 2025 Chatbot</div>
+    </div>
+  </div>
+</body>
+</html>

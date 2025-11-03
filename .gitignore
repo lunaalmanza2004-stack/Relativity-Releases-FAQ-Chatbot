@@ -1,0 +1,17 @@
+﻿__pycache__/
+*.py[cod]
+.venv/
+env/
+venv/
+.vscode/
+.DS_Store
+Thumbs.db
+.env
+service_account.json
+credentials.json
+logs/
+uploads/
+conversations/
+data/index/
+data/cache/
+data/exports/
